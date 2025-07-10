@@ -24,6 +24,7 @@ public class PizzaRestController {
 
     @GetMapping("/")
     public ResponseEntity<Pizza> index() {
+        ResponseEntity<Pizza> = pizzaService.findAll();
 
     }
 
