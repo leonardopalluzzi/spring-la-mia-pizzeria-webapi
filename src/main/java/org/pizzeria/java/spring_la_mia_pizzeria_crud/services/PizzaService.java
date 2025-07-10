@@ -5,7 +5,7 @@ import java.util.List;
 import org.pizzeria.java.spring_la_mia_pizzeria_crud.model.Pizza;
 import org.pizzeria.java.spring_la_mia_pizzeria_crud.repo.PizzaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.data.web.SpringDataWebProperties.Pageable;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
@@ -19,10 +19,22 @@ public class PizzaService {
         return pizzaRepo.findAll();
     }
 
-    public List<Pizza> findAllByTitle(Pageable pagination, String title) {
-        Page pizzaList = pizzaRepo.findAllByNameContaining(pagination, title);
+    public Page<Pizza> findAllByTitle(Pageable pagination, String title) {
+        Page<Pizza> pizzaList = pizzaRepo.findAllByNameContaining(pagination, title);
 
-        return pizzaList.toList();
+        return pizzaList;
+    }
+
+    public Pizza findById(Integer id) {
+        return pizzaRepo.findById(id).get();
+    }
+
+    public void save(Pizza pizza) {
+        pizzaRepo.save(pizza);
+    }
+
+    public void delete(Pizza pizza) {
+        pizzaRepo.delete(pizza);
     }
 
 }
